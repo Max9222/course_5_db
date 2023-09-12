@@ -1,4 +1,3 @@
-from typing import Any
 import psycopg2
 
 def create_database(database_name: str, params: dict):
@@ -17,24 +16,16 @@ def create_database(database_name: str, params: dict):
 
     with conn.cursor() as cur:
         cur.execute("""
-            CREATE TABLE channels (
-                channel_id SERIAL PRIMARY KEY,
-                title VARCHAR(255) NOT NULL,
-                views INTEGER,
-                subscribers INTEGER,
-                videos INTEGER,
-                channel_url TEXT
-            )
-        """)
-
-    with conn.cursor() as cur:
-        cur.execute("""
-            CREATE TABLE videos (
-                video_id SERIAL PRIMARY KEY,
-                channel_id INT REFERENCES channels(channel_id),
-                title VARCHAR NOT NULL,
-                publish_date DATE,
-                video_url TEXT
+            CREATE TABLE hh (
+                id SERIAL PRIMARY KEY,
+                name VARCHAR(255) NOT NULL,
+                url TEXT,
+                salary_from INTEGER DEFAULT 0,
+                salary_to INTEGER DEFAULT 0,
+                requirement VARCHAR(255),
+                responsibility VARCHAR(255),
+                experience VARCHAR(255),
+                date DATE
             )
         """)
 

@@ -1,6 +1,7 @@
 from src.api_hh import ApiHH
 from src.config import config
 from src.utils import create_database
+
 def main():
 
     employer_id = [
@@ -17,7 +18,7 @@ def main():
     list_hh = hh.get_formatted(vac_hh)  # подгоняем под удобрый формат
     #print(list_hh)
 
-    create_database('hh_job', params)
+    create_database('hh', params)
 
 
 if __name__ == '__main__':
