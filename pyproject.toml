@@ -9,6 +9,8 @@ packages = [{include = "course_5_db"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 requests = "^2.31.0"
+pip = "^23.2.1"
+psycopg2-binary = "^2.9.7"
 
 
 [build-system]
