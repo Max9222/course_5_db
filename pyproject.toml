@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "course-5-db"
+version = "0.1.0"
+description = ""
+authors = ["Max9222 <maxoog@bk.ru>"]
+readme = "README.md"
+packages = [{include = "course_5_db"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
