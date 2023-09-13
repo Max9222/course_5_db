@@ -1,4 +1,5 @@
 import psycopg2
+from typing import Any
 
 def create_database(database_name: str, params: dict):
     """Создание базы данных и таблиц для сохранения данных о каналах и видео."""
@@ -17,11 +18,10 @@ def create_database(database_name: str, params: dict):
     with conn.cursor() as cur:
         cur.execute("""
             CREATE TABLE hh (
+                employer_name VARCHAR(255) NOT NULL,
                 id SERIAL PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
                 url TEXT,
-                salary_from INTEGER DEFAULT 0,
-                salary_to INTEGER DEFAULT 0,
                 requirement VARCHAR(255),
                 responsibility VARCHAR(255),
                 experience VARCHAR(255),
@@ -29,5 +29,52 @@ def create_database(database_name: str, params: dict):
             )
         """)
 
+        # cur.execute("""
+        #         CREATE TABLE hh (
+        #             employer_name VARCHAR(255) NOT NULL,
+        #             id SERIAL PRIMARY KEY,
+        #             name VARCHAR(255) NOT NULL,
+        #             url TEXT,
+        #             #salary_from VARCHAR(255) NOT NULL,
+        #             salary_to VARCHAR(255) NOT NULL,
+        #             requirement VARCHAR(255),
+        #             responsibility VARCHAR(255),
+        #             experience VARCHAR(255),
+        #             date DATE
+        #         )
+        #     """)
+
     conn.commit()
     conn.close()
+
+def save_data_to_database(data: list[dict[str, Any]], database_name: str, params: dict) -> None:
+    """Сохранение данных канала и видео"""
+
+    conn = psycopg2.connect(dbname=database_name, **params)
+
+    with conn.cursor() as cur:
+        for job in data:
+
+            cur.execute(
+                """
+                INSERT INTO hh (employer_name, id, name, url, requirement, responsibility, experience, date)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                """,
+
+                (job['employer_name'], job['id'], job['name'], f"https://www.hh.com/{job['url']}",
+                 job['requirement'], job['responsibility'], job['experience'], job['date'])
+            )
+
+            # cur.execute(
+            #     """
+            #     INSERT INTO hh (employer_name, id, name, url, salary_from,
+            #      salary_to, requirement, responsibility, experience, date)
+            #     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            #     """,
+            #
+            #     (job['employer_name'], job['id'], job['name'], f"https://www.hh.com/{job['url']}",
+            #      job['salary_from'], job['salary_to'], job['requirement'], job['responsibility'], job['experience'],
+            #      job['date'])
+            # )
+        conn.commit()
+        conn.close()

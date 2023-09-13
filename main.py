@@ -1,6 +1,6 @@
 from src.api_hh import ApiHH
 from src.config import config
-from src.utils import create_database
+from src.utils import create_database, save_data_to_database
 
 def main():
 
@@ -18,7 +18,9 @@ def main():
     list_hh = hh.get_formatted(vac_hh)  # подгоняем под удобрый формат
     #print(list_hh)
 
-    create_database('hh', params)
+    create_database('hh', params)   # Создаем таблицу
+
+    save_data_to_database(list_hh, 'hh', params)  # Заполняем таблицу
 
 
 if __name__ == '__main__':
