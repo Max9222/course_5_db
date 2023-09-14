@@ -54,8 +54,8 @@ class ApiHH(APIJob):
                 'id': i['id'],  # id вакансии
                 'name': i['name'],  # Название вакансии
                 'url': i['url'],  # Ссылка на вакансию
-                #'salary_from': i['salary']['from'] if i['salary']['from'] else 0,  # Зарплата от
-                #'salary_to': i['salary']['to'] if i['salary']['to'] else 0,  # Зарплата до
+                'salary_from': i['salary']['from'] if i['salary']  else 0,  # Зарплата от
+                'salary_to': i['salary']['to'] if i['salary'] else 0,  # Зарплата до
                 'requirement': i['snippet']['requirement'],  # Требования
                 'responsibility': i['snippet']['responsibility'],  # Обязанности
                 'experience': i['experience']['name'],  # Опыт
