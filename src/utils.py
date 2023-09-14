@@ -42,9 +42,6 @@ def save_data_to_database(data: list[dict[str, Any]], database_name: str, params
 
     with conn.cursor() as cur:
         for job in data:
-
-
-
             cur.execute(
                 """
                 INSERT INTO hh (employer_name, id, name, url, salary_from,

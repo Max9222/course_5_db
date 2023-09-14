@@ -1,6 +1,7 @@
 from src.api_hh import ApiHH
 from src.config import config
 from src.utils import create_database, save_data_to_database
+from src.dbmanager import DBManager
 
 def main():
 
