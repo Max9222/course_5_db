@@ -23,7 +23,7 @@ def create_database(database_name: str, params: dict):
                     id SERIAL PRIMARY KEY,
                     name VARCHAR(255) NOT NULL,
                     url TEXT,
-                    salary_from TEXT,
+                    salary_from INT,
                     salary_to TEXT,
                     requirement VARCHAR(255),
                     responsibility VARCHAR(255),
@@ -34,6 +34,7 @@ def create_database(database_name: str, params: dict):
 
     conn.commit()
     conn.close()
+
 
 def save_data_to_database(data: list[dict[str, Any]], database_name: str, params: dict) -> None:
     """Сохранение данных канала и видео"""

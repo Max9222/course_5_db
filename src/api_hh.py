@@ -38,7 +38,6 @@ class ApiHH(APIJob):
 
     def get_vacancies(self):
         """ Метод выполняющий запрос"""
-
         req = requests.get(self.url, self.params)  # Посылаем запрос к API
         data = req.json()
 
@@ -48,7 +47,6 @@ class ApiHH(APIJob):
         """ Получение стандартного списка"""
 
         for i in data:
-
             dict_hh = {
                 'employer_name': i['employer']['name'],
                 'id': i['id'],  # id вакансии
@@ -63,4 +61,3 @@ class ApiHH(APIJob):
             }
             self.vacancies.append(dict_hh)
         return self.vacancies
-
